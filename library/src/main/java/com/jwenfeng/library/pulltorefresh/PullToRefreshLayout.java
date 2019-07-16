@@ -1,9 +1,9 @@
 package com.jwenfeng.library.pulltorefresh;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,6 +29,7 @@ import com.jwenfeng.library.pulltorefresh.view.LoadMoreView;
  * © 2016 jinwenfeng
  * © 版权所有，未经允许不得传播
  */
+@SuppressWarnings("unused")
 public class PullToRefreshLayout extends FrameLayout {
 
     private HeadView mHeaderView;
@@ -36,8 +37,8 @@ public class PullToRefreshLayout extends FrameLayout {
     private View mChildView;
 
     private static final long ANIM_TIME = 300;
-    private static int HEAD_HEIGHT = 60;
-    private static int FOOT_HEIGHT = 60;
+    private static final int HEAD_HEIGHT = 60;
+    private static final int FOOT_HEIGHT = 60;
 
     private static int head_height;
     private static int head_height_2;
@@ -52,7 +53,7 @@ public class PullToRefreshLayout extends FrameLayout {
     private boolean isRefresh;
     private boolean isLoadMore;
 
-    //滑动的最小距离
+    // 滑动的最小距离
     private int mTouchSlope;
 
     private BaseRefreshListener refreshListener;
@@ -75,13 +76,12 @@ public class PullToRefreshLayout extends FrameLayout {
 
     public PullToRefreshLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PullToRefreshLayout, defStyleAttr, 0);
         error = a.getResourceId(R.styleable.PullToRefreshLayout_view_error, error);
         loading = a.getResourceId(R.styleable.PullToRefreshLayout_view_loading, loading);
         empty = a.getResourceId(R.styleable.PullToRefreshLayout_view_empty, empty);
-
-        init();
+        a.recycle();
+        cal();
     }
 
     private void cal() {
@@ -89,22 +89,18 @@ public class PullToRefreshLayout extends FrameLayout {
         foot_height = DisplayUtil.dp2Px(getContext(), FOOT_HEIGHT);
         head_height_2 = DisplayUtil.dp2Px(getContext(), HEAD_HEIGHT * 2);
         foot_height_2 = DisplayUtil.dp2Px(getContext(), FOOT_HEIGHT * 2);
-
         mTouchSlope = ViewConfiguration.get(getContext()).getScaledTouchSlop();
-    }
-
-    private void init() {
-        cal();
-        int count = getChildCount();
-        if (count != 1) {
-            new IllegalArgumentException("child only can be one");
-        }
-
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+
+        int count = getChildCount();
+        if (count != 1) {
+            throw new IllegalArgumentException("child only can be one");
+        }
+
         mChildView = getChildAt(0);
         addHeadView();
         addFooterView();
@@ -173,6 +169,7 @@ public class PullToRefreshLayout extends FrameLayout {
         return super.onInterceptTouchEvent(ev);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (isRefresh || isLoadMore) return true;
@@ -184,7 +181,7 @@ public class PullToRefreshLayout extends FrameLayout {
                     dura = Math.min(head_height_2, dura);
                     dura = Math.max(0, dura);
                     mHeaderView.getView().getLayoutParams().height = (int) dura;
-                    ViewCompat.setTranslationY(mChildView, dura);
+                    mChildView.setTranslationY(dura);
                     requestLayout();
                     mHeaderView.progress(dura, head_height);
                 } else {
@@ -192,7 +189,7 @@ public class PullToRefreshLayout extends FrameLayout {
                         dura = Math.min(foot_height_2, Math.abs(dura));
                         dura = Math.max(0, Math.abs(dura));
                         mFooterView.getView().getLayoutParams().height = (int) dura;
-                        ViewCompat.setTranslationY(mChildView, -dura);
+                        mChildView.setTranslationY(-dura);
                         requestLayout();
                         mFooterView.progress(dura, foot_height);
                     }
@@ -216,7 +213,7 @@ public class PullToRefreshLayout extends FrameLayout {
                                         mHeaderView.loading();
                                     }
                                 });
-                    } else if (dy1 > 0 && dy1 < head_height) {
+                    } else {
                         setFinish(dy1, State.REFRESH);
                         mHeaderView.normal();
                     }
@@ -248,14 +245,14 @@ public class PullToRefreshLayout extends FrameLayout {
         if (mChildView == null) {
             return false;
         }
-        return ViewCompat.canScrollVertically(mChildView, 1);
+        return mChildView.canScrollVertically(1);
     }
 
     private boolean canChildScrollUp() {
         if (mChildView == null) {
             return false;
         }
-        return ViewCompat.canScrollVertically(mChildView, -1);
+        return mChildView.canScrollVertically(-1);
     }
 
     /**
@@ -272,7 +269,7 @@ public class PullToRefreshLayout extends FrameLayout {
                 int value = (int) valueAnimator.getAnimatedValue();
                 if (state == State.REFRESH) {
                     mHeaderView.getView().getLayoutParams().height = value;
-                    ViewCompat.setTranslationY(mChildView, value);
+                    mChildView.setTranslationY(value);
                     if (purpose == 0) { //代表结束加载
                         mHeaderView.finishing(value, head_height_2);
                     } else {
@@ -280,7 +277,7 @@ public class PullToRefreshLayout extends FrameLayout {
                     }
                 } else {
                     mFooterView.getView().getLayoutParams().height = value;
-                    ViewCompat.setTranslationY(mChildView, -value);
+                    mChildView.setTranslationY(-value);
                     if (purpose == 0) { //代表结束加载
                         mFooterView.finishing(value, head_height_2);
                     } else {
@@ -596,6 +593,5 @@ public class PullToRefreshLayout extends FrameLayout {
         head_height_2 = DisplayUtil.dp2Px(getContext(), refresh);
         foot_height_2 = DisplayUtil.dp2Px(getContext(), loadMore);
     }
-
 
 }

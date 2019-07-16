@@ -1,7 +1,6 @@
 package com.jwenfeng.pulltorefresh.view;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -9,6 +8,8 @@ import android.widget.TextView;
 
 import com.jwenfeng.library.pulltorefresh.view.HeadView;
 import com.jwenfeng.pulltorefresh.R;
+
+import androidx.annotation.NonNull;
 
 /**
  * 当前类注释:

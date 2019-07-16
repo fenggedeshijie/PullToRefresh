@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -11,7 +13,7 @@
         android:layout_height="120dp"
         android:src="@mipmap/ic_nowifi"
         android:scaleType="centerInside"
-        />
+        tools:ignore="ContentDescription"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,8 +21,7 @@
         android:layout_marginTop="6dp"
         android:gravity="center"
         android:textSize="18sp"
-        android:text="@string/net_error"
-        />
+        android:text="@string/net_error"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,7 +30,6 @@
         android:gravity="center"
         android:textSize="14sp"
         android:text="@string/error"
-        android:textColor="@color/grey"
-        />
+        android:textColor="@color/grey"/>
 
 </LinearLayout>

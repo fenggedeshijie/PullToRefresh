@@ -1,10 +1,7 @@
 package com.jwenfeng.pulltorefresh;
 
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
 import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
@@ -14,6 +11,10 @@ import com.jwenfeng.pulltorefresh.adapter.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewActivity extends AppCompatActivity {
 
@@ -36,24 +37,24 @@ public class RecyclerViewActivity extends AppCompatActivity {
             list.add("PullToRefreshLayout"+i);
         }
 
-       new Handler().postDelayed(new Runnable() {
-           @Override
-           public void run() {
-               pullToRefreshLayout.showView(ViewStatus.LOADING_STATUS);
-               new Handler().postDelayed(new Runnable() {
-                   @Override
-                   public void run() {
-                       pullToRefreshLayout.showView(ViewStatus.EMPTY_STATUS);
-                       new Handler().postDelayed(new Runnable() {
-                           @Override
-                           public void run() {
-                               pullToRefreshLayout.showView(ViewStatus.ERROR_STATUS);
-                           }
-                       },2000);
-                   }
-               },2000);
-           }
-       },2000);
+        /*new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pullToRefreshLayout.showView(ViewStatus.LOADING_STATUS);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        pullToRefreshLayout.showView(ViewStatus.EMPTY_STATUS);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                pullToRefreshLayout.showView(ViewStatus.ERROR_STATUS);
+                            }
+                        }, 2000);
+                    }
+                }, 2000);
+            }
+        }, 2000);*/
 
         adapter = new RecyclerViewAdapter(list);
 

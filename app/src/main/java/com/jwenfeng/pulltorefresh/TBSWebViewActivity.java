@@ -1,13 +1,14 @@
 package com.jwenfeng.pulltorefresh;
 
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
 import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class TBSWebViewActivity extends AppCompatActivity {
 

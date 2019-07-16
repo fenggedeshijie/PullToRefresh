@@ -1,9 +1,6 @@
 package com.jwenfeng.pulltorefresh.view;
 
 import android.content.Context;
-import android.support.annotation.AttrRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +9,10 @@ import android.widget.TextView;
 
 import com.jwenfeng.library.pulltorefresh.view.FooterView;
 import com.jwenfeng.pulltorefresh.R;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * 当前类注释:

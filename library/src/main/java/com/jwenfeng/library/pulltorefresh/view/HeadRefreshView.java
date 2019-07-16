@@ -1,8 +1,8 @@
 package com.jwenfeng.library.pulltorefresh.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -41,11 +41,12 @@ public class HeadRefreshView extends FrameLayout implements HeadView {
     }
 
     private void init(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_header,null);
+        @SuppressLint("InflateParams")
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_header, null);
         addView(view);
-        tv = (TextView) view.findViewById(R.id.header_tv);
-        arrow = (ImageView) view.findViewById(R.id.header_arrow);
-        progressBar = (ProgressBar) view.findViewById(R.id.header_progress);
+        tv = view.findViewById(R.id.header_tv);
+        arrow = view.findViewById(R.id.header_arrow);
+        progressBar = view.findViewById(R.id.header_progress);
     }
 
     @Override

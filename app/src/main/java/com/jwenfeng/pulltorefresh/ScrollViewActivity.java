@@ -1,12 +1,12 @@
 package com.jwenfeng.pulltorefresh;
 
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
 import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
-import com.jwenfeng.library.pulltorefresh.State;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ScrollViewActivity extends AppCompatActivity {
 

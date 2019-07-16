@@ -6,7 +6,6 @@ package com.jwenfeng.library.pulltorefresh;
 
 public interface BaseRefreshListener {
 
-
     /**
      * 刷新
      */

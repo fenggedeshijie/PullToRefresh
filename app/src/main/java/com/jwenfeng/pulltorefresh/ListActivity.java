@@ -1,7 +1,6 @@
 package com.jwenfeng.pulltorefresh;
 
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -12,6 +11,8 @@ import com.jwenfeng.pulltorefresh.adapter.ListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ListActivity extends AppCompatActivity {
 
